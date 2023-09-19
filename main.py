@@ -1,4 +1,6 @@
 import datetime
+from datetime import datetime
+
 
 import pandas as pd
 import requests
@@ -29,7 +31,12 @@ if response.status_code == 200:
 
 df = pd.DataFrame(results)
 
+
+
+
+print(df.columns)
 print(len(df))
+
 
 
 
