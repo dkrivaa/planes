@@ -31,6 +31,23 @@ if response.status_code == 200:
 
 df = pd.DataFrame(results)
 
+date_format = "%Y-%m-%d %H:%M:%S"
+# Define a function to convert the datetime
+def convert_to_datetime(row):
+    return datetime.strptime(row.replace('T', ' '), date_format)
+
+df['planned_time'] = df['CHSTOL'].apply(convert_to_datetime)
+df['actual_time'] = df['CHPTOL'].apply(convert_to_datetime)
+
+dfi = df.loc[(df['CHRMINE'] == 'LANDED') | (df['CHRMINE'] == 'DEPARTED')]
+
+dfi['diff'] = dfi['actual_time'] - dfi['planned_time']
+
+
+delays = (dfi.groupby(dfi['CHOPERD'])['diff'].mean())
+
+print(delays.nlargest(10))
+print(delays.nsmallest(10))
 
 
 
