@@ -1,7 +1,5 @@
 import datetime
 from datetime import datetime
-
-
 import pandas as pd
 import requests
 import json
