@@ -51,9 +51,9 @@ def delays_depart():
 
     average_delay = dfi['delay'].mean()
     average_delay_by_airline = dfi.groupby(df['CHOPERD'])['delay'].mean()
-    print('Average delay last 24 hours: ', average_delay)
-    print(average_delay_by_airline.nlargest(5))
-    print(average_delay_by_airline.nsmallest(5)[::-1])
+    print('Average departure delay last 24 hours: ', average_delay)
+    print('departures: ', average_delay_by_airline.nlargest(5))
+    print('departures: ', average_delay_by_airline.nsmallest(5)[::-1])
 
 
 
