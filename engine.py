@@ -49,10 +49,11 @@ def delays_depart():
     df = get_data()
     dfi = df.loc[(df['CHAORD'] == 'D') & (df['CHRMINE'] == 'DEPARTED')]
 
-    average_delay = dfi.groupby(df['CHOPERD'])['delay'].mean()
-    print('Average delay last 24 hours: ', dfi['delay'].mean())
-    print(average_delay.nlargest(5))
-    print(average_delay.nsmallest(5)[::-1])
+    average_delay = dfi['delay'].mean()
+    average_delay_by_airline = dfi.groupby(df['CHOPERD'])['delay'].mean()
+    print('Average delay last 24 hours: ', average_delay)
+    print(average_delay_by_airline.nlargest(5))
+    print(average_delay_by_airline.nsmallest(5)[::-1])
 
 
 
