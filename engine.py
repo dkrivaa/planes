@@ -40,11 +40,21 @@ def get_data():
     df['planned_time'] = df['CHSTOL'].apply(convert_to_datetime)
     df['actual_time'] = df['CHPTOL'].apply(convert_to_datetime)
 
+    df['delay'] = df['actual_time'] - df['planned_time']
+
     return df
 
 
 def delays_depart():
     df = get_data()
+    dfi = df.loc[(df['CHAORD'] == 'D') & (df['CHRMINE'] == 'DEPARTED')]
+
+    average_delay = dfi.groupby(df['CHOPERD'])['delay'].mean()
+
+    print(average_delay.nlargest(5))
+    print(average_delay.nsmallest(5)[::-1])
+
+
 
 
 
