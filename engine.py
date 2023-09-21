@@ -51,7 +51,7 @@ def delays_depart():
 
     average_delay_depart = dfd['delay'].mean()
     average_delay_by_airline = dfd.groupby(df['CHOPERD'])['delay'].mean()
-    print('Number of departures last 24 hours: ', len(dfd))
+    print('Number of airline departures last 24 hours: ', len(dfd))
     print('Average departure delay last 24 hours: ', average_delay_depart)
     print('departures: ', average_delay_by_airline.nlargest(5))
     print('departures: ', average_delay_by_airline.nsmallest(5)[::-1])
@@ -65,7 +65,7 @@ def delays_arrive():
     average_delay_arrive = dfa1['delay'].mean()
     average_early_arrival = -(dfa2['delay'].mean())
     average_delay_by_airline = dfa1.groupby(df['CHOPERD'])['delay'].mean()
-    print('Number of arrivals last 24 hours: ', len(dfa))
+    print('Number of airline arrivals last 24 hours: ', len(dfa))
     print('Average arrival delay last 24 hours: ', average_delay_arrive)
     print('arrivals: ', average_delay_by_airline.nlargest(5))
     print('arrivals: ', average_delay_by_airline.nsmallest(5)[::-1])
