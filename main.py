@@ -7,8 +7,6 @@ import requests
 import json
 
 
-
-
 url = "https://data.gov.il/api/3/action/datastore_search?resource_id=e83f763b-b7d7-479e-b172-ae981ddc6de5"
 
 response = requests.get(url)
@@ -39,15 +37,15 @@ def convert_to_datetime(row):
 df['planned_time'] = df['CHSTOL'].apply(convert_to_datetime)
 df['actual_time'] = df['CHPTOL'].apply(convert_to_datetime)
 
-dfi = df.loc[(df['CHRMINE'] == 'LANDED') | (df['CHRMINE'] == 'DEPARTED')]
+dfi = df.loc[(df['CHRMINE'] == 'DEPARTED') & (df['CHAORD'] == 'D')]
 
 dfi['diff'] = dfi['actual_time'] - dfi['planned_time']
 
 
 delays = (dfi.groupby(dfi['CHOPERD'])['diff'].mean())
 
-print(delays.nlargest(10))
-print(delays.nsmallest(10))
+print(delays.nlargest(5))
+print(delays.nsmallest(5))
 
 
 
