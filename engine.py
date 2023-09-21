@@ -37,7 +37,6 @@ def get_data():
     # Adding two columns for planned and actual time in datetime format
     df['planned_time'] = df['CHSTOL'].apply(convert_to_datetime)
     df['actual_time'] = df['CHPTOL'].apply(convert_to_datetime)
-
     df['delay'] = df['actual_time'] - df['planned_time']
 
     return df
@@ -68,6 +67,15 @@ def delays_arrive():
     print('arrivals: ', average_delay_by_airline.nlargest(5))
     print('arrivals: ', average_delay_by_airline.nsmallest(5)[::-1])
     print('Average early arrival last 24 hours: ', average_early_arrival)
+
+
+def destinct_flights():
+    df = get_data()
+    # sort dataframe by actual time
+    df.sort_values(by=['CHPTOL'])
+
+
+
 
 
 
